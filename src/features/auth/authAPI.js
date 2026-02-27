@@ -1,9 +1,6 @@
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 
 export const loginUserAPI = async (credentials) => {
-  const response = await axios.post(
-    "https://dummyjson.com/auth/login",
-    credentials,
-  );
+  const response = await axiosInstance.post("/auth/login", credentials);
   return response.data;
 };
