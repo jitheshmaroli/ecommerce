@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../features/auth/authThunk";
 
@@ -7,6 +7,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { error, loading } = useSelector((state) => state.auth);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,8 +38,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="bg-green-500 text-white w-full p-2 rounded">
-          Login
+          {loading ? "Loging in..." : "Login"}
         </button>
+        {error && <p className="text-red-500">{error.message}</p>}
       </form>
     </div>
   );
